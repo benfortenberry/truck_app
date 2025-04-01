@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import React, { useEffect, useState } from "react";
 
 function AddEditExpense(props) {
-  const createEditExpenseApi = "http://localhost:5002/expense";
+  const baseExpenseApi = process.env.REACT_APP_BASE_EXPENSE_API;
 
   let selectedExpense = props.selectedexpense;
   let expenseTypes = props.expensetypes;
@@ -40,7 +40,7 @@ function AddEditExpense(props) {
     };
 
     try {
-      const response = await fetch(createEditExpenseApi, {
+      const response = await fetch(baseExpenseApi, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +68,7 @@ function AddEditExpense(props) {
     };
 
     try {
-      const response = await fetch(createEditExpenseApi, {
+      const response = await fetch(baseExpenseApi, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

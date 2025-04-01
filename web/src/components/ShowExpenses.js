@@ -6,9 +6,9 @@ import Table from "react-bootstrap/Table";
 import AddEditExpense from "./AddEditExpense";
 
 const ShowExpense = () => {
-  const showExpenseApi = "http://localhost:5002/expenses";
-  const getExpenseTypesApi = "http://localhost:5002/expense-types";
-  const deleteExpenseApi = "http://localhost:5002/expense";
+  const showExpenseApi = process.env.REACT_APP_SHOW_EXPENSE_API;
+  const getExpenseTypesApi = process.env.REACT_APP_GET_EXPENSE_TYPES_API;
+  const deleteExpenseApi = process.env.REACT_APP_BASE_EXPENSE_API;
 
   const [expenseTypes, setExpenseTypes] = useState([]);
 
