@@ -66,7 +66,13 @@ Sort Expenses:
 Click on the column headers (Date, Type, Amount, Description) to sort the expenses.
 
 ## Future Enhancements
+
+Use a real database.
+
 Add user authentication for secure access.
+
 Implement advanced filtering options.
+
 Add charts and graphs for expense visualization.
+
 Support exporting expenses to CSV or PDF.
