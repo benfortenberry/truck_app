@@ -28,11 +28,16 @@ The **Truck Expense App** is a web application designed to help users manage and
 The app interacts with the following backend API endpoints:
 
 GET /expenses: Fetch all expenses.
+
 POST /expense: Add a new expense.
+
 PUT /expense/:id: Edit an existing expense.
+
 DELETE /expense/:id: Delete an expense.
+
 GET /expense-types: Fetch all expense types.
 
+Swagger is at `/swagger/index.html`
 
 ## How to Run Locally
 
