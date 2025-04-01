@@ -1,0 +1,17 @@
+a {
+  color: #ccc;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+body {
+  background-color: #212529;
+  color: #ccc;
+}
+
+th {
+  text-decoration: underline;
+  cursor: pointer;
+}
