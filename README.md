@@ -3,7 +3,7 @@
 
 ![Alt text](screen1.png?raw=true "Screenshot")
 
-The **Truck Expense App** is a web application designed to help users manage and track truck-related expenses efficiently. Built with React, it provides features like adding, editing, deleting, and sorting expenses, along with a clean and responsive user interface.
+The **Truck Expense App** is a web application designed to help users manage and track truck-related expenses efficiently. Built with React and C#, it provides features like adding, editing, deleting, and sorting expenses, along with a clean and responsive user interface.
 
 ---
 
@@ -40,7 +40,7 @@ DELETE /expense/:id: Delete an expense.
 
 GET /expense-types: Fetch all expense types.
 
-Swagger is at `/swagger/index.html`
+Swagger is at `<your api url>/swagger/index.html`
 
 ## How to Run Locally
 
