@@ -46,7 +46,7 @@ const ShowExpense = () => {
 
   useEffect(() => {
     getExpenses();
-  }, []);
+  });
 
   const getExpenses = () => {
     axios
@@ -61,7 +61,7 @@ const ShowExpense = () => {
 
   useEffect(() => {
     getExpenseTypes();
-  }, []);
+  });
 
   const getExpenseTypes = () => {
     axios
