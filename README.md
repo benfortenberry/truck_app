@@ -34,6 +34,11 @@ DELETE /expense/:id: Delete an expense.
 GET /expense-types: Fetch all expense types.
 
 
+## How to Run Locally
+
+In 2 seperate terminals run the commands `npm start` in the web directory. and `dotnet run` in the api directory.
+
+
 ## How to Use
 
 Add an Expense:

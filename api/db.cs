@@ -10,11 +10,7 @@ public record Expense
 
   public string? Description { get; set; }
 
-
-
 }
-
-
 public record ExpenseType
 {
   public int Id { get; set; }
@@ -51,28 +47,39 @@ public class ExpenseDB
   }
   public static Expense CreateExpense(Expense expense)
   {
+
+    if (_expenses.Any(e => e.Id == expense.Id))
+    {
+      throw new ArgumentException("An expense with the same ID already exists.");
+    }
+
+    if (expense.Amount == null || expense.Date == null || expense.TypeId == null || string.IsNullOrEmpty(expense.Description))
+    {
+      throw new ArgumentException("All fields are required.");
+    }
+
     _expenses.Add(expense);
     return expense;
   }
 
   public static Expense UpdateExpense(Expense update)
   {
-    _expenses = _expenses.Select(expense =>
+    var existingExpense = _expenses.FirstOrDefault(e => e.Id == update.Id);
+    if (existingExpense == null)
     {
-      if (expense.Id == update.Id)
-      {
-        expense.Amount = update.Amount;
-        expense.Date = update.Date;
-        expense.TypeId = update.TypeId;
-        expense.Description = update.Description;
-      }
-      return expense;
-    }).ToList();
-    return update;
+      throw new KeyNotFoundException("Expense not found.");
+    }
+
+    existingExpense.Amount = update.Amount;
+    existingExpense.Date = update.Date;
+    existingExpense.TypeId = update.TypeId;
+    existingExpense.Description = update.Description;
+
+    return existingExpense;
   }
 
   public static void RemoveExpense(int id)
   {
-    _expenses = _expenses.FindAll(expense => expense.Id != id).ToList();
+    _expenses.RemoveAll(expense => expense.Id == id);
   }
 }
