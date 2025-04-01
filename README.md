@@ -43,9 +43,12 @@ Swagger is at `/swagger/index.html`
 
 create an `.env` file with the following urls:
 
-`REACT_APP_SHOW_EXPENSE_API=<your api url>/expenses
+````
+REACT_APP_SHOW_EXPENSE_API=<your api url>/expenses
 REACT_APP_GET_EXPENSE_TYPES_API<your api url>/expense-types
-REACT_APP_BASE_EXPENSE_API=<your api url>/expense `
+REACT_APP_BASE_EXPENSE_API=<your api url>/expense 
+
+````
 
 In 2 seperate terminals run the commands `npm start` in the web directory. and `dotnet run` in the api directory.
 
