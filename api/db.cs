@@ -53,11 +53,6 @@ public class ExpenseDB
       throw new ArgumentException("An expense with the same ID already exists.");
     }
 
-    if (expense.Amount == null || expense.Date == null || expense.TypeId == null || string.IsNullOrEmpty(expense.Description))
-    {
-      throw new ArgumentException("All fields are required.");
-    }
-
     _expenses.Add(expense);
     return expense;
   }
