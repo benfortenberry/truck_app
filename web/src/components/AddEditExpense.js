@@ -98,7 +98,9 @@ function AddEditExpense(props) {
         centered
       >
         <Modal.Body className="bg-dark">
-          <h4>{selectedExpense ? "Edit Expense" : "Add Expense"}</h4>
+          <h4 data-testid="modal-title">
+            {selectedExpense ? "Edit Expense" : "Add Expense"}
+          </h4>
 
           <br />
           <div className="row">
@@ -106,7 +108,6 @@ function AddEditExpense(props) {
               <label>Date</label>
               <Form.Control
                 type="date"
-                // defaultValue={selectedExpense?.date}
                 value={newDate || ""}
                 onChange={onDateInput}
                 placeholder="Date"
@@ -117,8 +118,8 @@ function AddEditExpense(props) {
               <label>Expense Type</label>
 
               <Form.Select
-                // defaultValue={selectedExpense?.typeId}
                 onChange={onTypeIdInput}
+                  data-testid="select-expense-type"
                 value={newTypeId || ""}
               >
                 <option value={0}>Select One</option>
@@ -136,7 +137,6 @@ function AddEditExpense(props) {
               <label>Amount</label>
               <Form.Control
                 type="number"
-                // defaultValue={selectedExpense?.amount}
                 value={newAmount || ""}
                 onChange={onAmountInput}
                 placeholder="Amount"
@@ -150,9 +150,9 @@ function AddEditExpense(props) {
               <Form.Control
                 as="textarea"
                 placeholder="Description"
+                data-testid="description"
                 value={newDescription || ""}
                 onChange={onDescriptionInput}
-                // defaultValue={selectedExpense?.description}
                 rows={3}
               />
             </div>

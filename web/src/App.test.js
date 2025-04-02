@@ -1,8 +1,20 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import App from "./App";
+import "@testing-library/jest-dom";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App Component", () => {
+  test("renders the Layout and ShowExpenses components for the root route", () => {
+    render(
+        <App />
+    );
+
+    // Check if the Layout component renders
+    expect(screen.getByText(/Truck Expense App/i)).toBeInTheDocument();
+
+   
+  });
+
+
 });

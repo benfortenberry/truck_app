@@ -14,7 +14,7 @@ const ShowExpense = () => {
   const [expenseTypes, setExpenseTypes] = useState([]);
 
   const [expenses, setExpenses] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [modalShow, setModalShow] = useState(false);
@@ -23,19 +23,16 @@ const ShowExpense = () => {
   const [sortDirection, setSortDirection] = useState("asc");
 
   const handleDelete = async (id) => {
-    setIsLoading(true);
     try {
       const response = await fetch(deleteExpenseApi.concat("/") + id, {
         method: "DELETE",
       });
-      if (!response.ok) {
-        throw new Error("Failed to delete item");
+      if (response.ok) {
+        setExpenses(expenses.filter((item) => item.id !== id));
       }
-      setExpenses(expenses.filter((item) => item.id !== id));
     } catch (error) {
       setError(error.message);
     } finally {
-      setIsLoading(false);
     }
   };
 
@@ -51,12 +48,15 @@ const ShowExpense = () => {
   }, []);
 
   const getExpenses = () => {
+    setIsLoading(true);
     axios
       .get(showExpenseApi)
       .then((res) => {
         setExpenses(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         setError("Failed to fetch expenses");
       });
   };
@@ -101,13 +101,13 @@ const ShowExpense = () => {
     setSortDirection(direction);
     setExpenses(sortedExpenses);
   }
-
-  if (expenses.length === 0) {
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  } else if (expenses.length === 0) {
     return <h1>no expenses found</h1>;
   } else {
     return (
       <div className=" table table-responsive w-100">
-        {isLoading && <p>Loading</p>}
         {error && <p>Error: {error}</p>}
         <Table striped bordered hover variant="dark">
           <thead>
@@ -171,6 +171,8 @@ const ShowExpense = () => {
                     </Link>
                     &nbsp;&nbsp;&nbsp;
                     <Link
+                      role="link"
+                      data-testid="delete"
                       onClick={() => {
                         if (
                           window.confirm(
@@ -216,6 +218,7 @@ const ShowExpense = () => {
 
         <Button
           className="btn-secondary "
+          data-testid="add-expense"
           onClick={() => {
             setSelectedExpense("");
           }}
