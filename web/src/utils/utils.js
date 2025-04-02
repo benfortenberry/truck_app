@@ -12,7 +12,3 @@ export function currencyFormat(num) {
   }
 }
 
-export function expenseTypeFormat(id, expenseTypes) {
-  let expenseType = expenseTypes.find((item) => item.id === id);
-  return expenseType ? expenseType.name : "Unknown";
-}

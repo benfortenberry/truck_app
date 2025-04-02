@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Toast, ToastContainer } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import AddEditExpense from "./AddEditExpense";
-import { currencyFormat, expenseTypeFormat } from "../utils/utils";
+import { currencyFormat } from "../utils/utils";
 
 const ShowExpense = () => {
   const showExpenseApi = process.env.REACT_APP_SHOW_EXPENSE_API;
@@ -101,6 +101,12 @@ const ShowExpense = () => {
     setSortDirection(direction);
     setExpenses(sortedExpenses);
   }
+
+  function expenseTypeFormat(id) {
+    let expenseType = expenseTypes.find((item) => item.id === id);
+    return expenseType ? expenseType.name : "Unknown";
+  }
+
   if (isLoading) {
     return <h1>Loading...</h1>;
   } else if (expenses.length === 0) {

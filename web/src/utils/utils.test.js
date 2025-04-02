@@ -37,26 +37,4 @@ describe("Utils Functions", () => {
     });
   });
 
-  describe("expenseTypeFormat", () => {
-    const expenseTypes = [
-      { id: 1, name: "Fuel" },
-      { id: 2, name: "Maintenance" },
-      { id: 3, name: "Tolls" },
-    ];
-
-    test("returns the correct expense type name for a valid id", () => {
-      expect(expenseTypeFormat(1, expenseTypes)).toBe("Fuel");
-      expect(expenseTypeFormat(2, expenseTypes)).toBe("Maintenance");
-      expect(expenseTypeFormat(3, expenseTypes)).toBe("Tolls");
-    });
-
-    test("returns 'Unknown' for an invalid id", () => {
-      expect(expenseTypeFormat(999, expenseTypes)).toBe("Unknown");
-      expect(expenseTypeFormat(null, expenseTypes)).toBe("Unknown");
-    });
-
-    test("returns 'Unknown' when expenseTypes is empty", () => {
-      expect(expenseTypeFormat(1, [])).toBe("Unknown");
-    });
-  });
 });
