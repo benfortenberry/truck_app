@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { getRandomInt } from "../utils/utils";
 
 import React, { useEffect, useState } from "react";
 
@@ -85,12 +86,6 @@ function AddEditExpense(props) {
       alert(error.message);
     }
   };
-
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 
   if (selectedExpense === null) {
     return null;

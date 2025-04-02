@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Toast, ToastContainer } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import AddEditExpense from "./AddEditExpense";
+import { currencyFormat, expenseTypeFormat } from "../utils/utils";
 
 const ShowExpense = () => {
   const showExpenseApi = process.env.REACT_APP_SHOW_EXPENSE_API;
@@ -46,6 +47,7 @@ const ShowExpense = () => {
 
   useEffect(() => {
     getExpenses();
+    getExpenseTypes();
   }, []);
 
   const getExpenses = () => {
@@ -59,10 +61,6 @@ const ShowExpense = () => {
       });
   };
 
-  useEffect(() => {
-    getExpenseTypes();
-  }, []);
-
   const getExpenseTypes = () => {
     axios
       .get(getExpenseTypesApi)
@@ -74,24 +72,16 @@ const ShowExpense = () => {
       });
   };
 
-  function currencyFormat(num) {
-    if (num) {
-      return "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-    } else {
-      return "$0.00";
-    }
-  }
-
   function handleSort(column) {
     let direction = "asc";
     if (sortKey === column && sortDirection === "asc") {
       direction = "desc";
     }
-  
+
     const sortedExpenses = [...expenses].sort((a, b) => {
       let aValue = a[column.toLowerCase()] || "";
       let bValue = b[column.toLowerCase()] || "";
-  
+
       if (column === "Date") {
         aValue = new Date(a.date);
         bValue = new Date(b.date);
@@ -99,22 +89,17 @@ const ShowExpense = () => {
         aValue = expenseTypeFormat(a.typeId);
         bValue = expenseTypeFormat(b.typeId);
       }
-  
+
       if (direction === "asc") {
         return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
       } else {
         return aValue < bValue ? 1 : aValue > bValue ? -1 : 0;
       }
     });
-  
+
     setSortKey(column);
     setSortDirection(direction);
     setExpenses(sortedExpenses);
-  }
-
-  function expenseTypeFormat(id) {
-    let expenseType = expenseTypes.find((item) => item.id === id);
-    return expenseType ? expenseType.name : "Unknown";
   }
 
   if (expenses.length === 0) {
@@ -127,23 +112,39 @@ const ShowExpense = () => {
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
-              <th onClick={() => handleSort("Date")} role="button" aria-label="Sort by Date">
+              <th
+                onClick={() => handleSort("Date")}
+                role="button"
+                aria-label="Sort by Date"
+              >
                 Date{" "}
                 {sortKey === "Date" && (sortDirection === "asc" ? "↑" : "↓")}
               </th>
-              <th onClick={() => handleSort("Type")} role="button" aria-label="Sort by Type">
+              <th
+                onClick={() => handleSort("Type")}
+                role="button"
+                aria-label="Sort by Type"
+              >
                 Type{" "}
                 {sortKey === "Type" && (sortDirection === "asc" ? "↑" : "↓")}
               </th>
-              <th onClick={() => handleSort("Amount")} role="button" aria-label="Sort by Amount">
+              <th
+                onClick={() => handleSort("Amount")}
+                role="button"
+                aria-label="Sort by Amount"
+              >
                 Amount{" "}
                 {sortKey === "Amount" && (sortDirection === "asc" ? "↑" : "↓")}
               </th>
-              <th onClick={() => handleSort("Description")} role="button" aria-label="Sort by Descirption">
+              <th
+                onClick={() => handleSort("Description")}
+                role="button"
+                aria-label="Sort by Descirption"
+              >
                 Description{" "}
                 {sortKey === "Description" &&
                   (sortDirection === "asc" ? "↑" : "↓")}
-              </th> 
+              </th>
               <th></th>
             </tr>
           </thead>
@@ -156,7 +157,7 @@ const ShowExpense = () => {
                       new Date(expense.date)
                     )}
                   </td>
-                  <td>{expenseTypeFormat(expense.typeId)}</td>
+                  <td>{expenseTypeFormat(expense.typeId, expenseTypes)}</td>
                   <td>{currencyFormat(expense.amount)}</td>
                   <td>{expense.description}</td>
                   <td>
