@@ -177,22 +177,16 @@ function AddEditExpense(props) {
               </div>
             </div>
 
-              <div className="d-flex justify-content-end mt-3">
-          
-           
-               
-                <Button type="submit" className="button  btn-success mr-3">
-                  {selectedExpense && <span>Save</span>}
-                  {!selectedExpense && <span>Add</span>}
-                </Button>
-&nbsp;&nbsp;&nbsp;
-                <Button className="btn-secondary   ml-3 " onClick={props.onHide}>
-                  Cancel
-                </Button>
-
-             </div>
-               
-             
+            <div className="d-flex justify-content-end mt-3">
+              <Button type="submit" className="button  btn-success mr-3">
+                {selectedExpense && <span>Save</span>}
+                {!selectedExpense && <span>Add</span>}
+              </Button>
+              &nbsp;&nbsp;&nbsp;
+              <Button className="btn-secondary   ml-3 " onClick={props.onHide}>
+                Cancel
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
       </Modal>

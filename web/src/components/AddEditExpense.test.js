@@ -82,20 +82,17 @@ describe("AddEditExpense Component", () => {
 
     // Wait for the API call
     await waitFor(() => {
+      const expectedBody = {
+        id: expect.any(Number),
+        amount: "150.75",
+        description: "Updated description",
+        date: "2025-03-25",
+        typeId: "1",
+      };
 
-        const expectedBody = {
-            id: expect.any(Number),
-            amount: "150.75",
-            description: "Updated description",
-            date: "2025-03-25",
-            typeId: "1",
-          };
-    
-          const actualBody = JSON.parse(fetch.mock.calls[0][1].body);
-    
-          expect(actualBody).toEqual(expectedBody);
+      const actualBody = JSON.parse(fetch.mock.calls[0][1].body);
 
-    
+      expect(actualBody).toEqual(expectedBody);
     });
 
     // Ensure the modal is closed
